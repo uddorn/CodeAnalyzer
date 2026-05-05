@@ -16,13 +16,11 @@ namespace CodeAnalyzer.Core
                 throw new ArgumentException("Підтримуються лише мови 'C#' та 'VB'.", nameof(language));
             }
 
-            // Базова логіка перевірки для тестів
-            // Якщо це C#, рядок має закінчуватися крапкою з комою. Якщо VB - ні.
             if (language == "C#")
             {
                 return code.Trim().EndsWith(";");
             }
-            else // Для VB
+            else 
             {
                 return !code.Contains(";");
             }

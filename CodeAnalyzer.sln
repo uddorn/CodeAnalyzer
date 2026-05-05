@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzer", "CodeAnalyze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzer.Core", "CodeAnalyzer.Core\CodeAnalyzer.Core.csproj", "{D88894DD-DB7D-44DA-9F3B-0E313051C241}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzer.Tests", "CodeAnalyzer.Tests\CodeAnalyzer.Tests.csproj", "{8F6ED17F-91D9-4132-9045-28E99018459D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D88894DD-DB7D-44DA-9F3B-0E313051C241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D88894DD-DB7D-44DA-9F3B-0E313051C241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D88894DD-DB7D-44DA-9F3B-0E313051C241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F6ED17F-91D9-4132-9045-28E99018459D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6ED17F-91D9-4132-9045-28E99018459D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6ED17F-91D9-4132-9045-28E99018459D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6ED17F-91D9-4132-9045-28E99018459D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
