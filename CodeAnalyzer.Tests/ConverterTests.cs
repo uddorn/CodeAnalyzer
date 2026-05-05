@@ -32,7 +32,7 @@ namespace CodeAnalyzer.Tests
         {
             var converter = new ProgramConverter();
 
-            Assert.Throws<ArgumentNullException>(() => converter.ConvertToCSharp(null));
+            Assert.Throws<ArgumentNullException>(() => converter.ConvertToCSharp(null!));
         }
 
         [Fact]
@@ -55,6 +55,30 @@ namespace CodeAnalyzer.Tests
             var helper = new ProgramHelper();
 
             var result = helper.CodeCheckSyntax(code, language);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("Dim x = 10", "[Імітація] Перетворення на C# завершено.\nРезультат: var x = 10;")]
+        [InlineData("var y = 20;", "[Імітація] Перетворення на C# завершено.\nРезультат: var y = 20;")]
+        public void ConvertToCSharp_ReturnsExpectedResult(string code, string expected)
+        {
+            var converter = new ProgramConverter();
+
+            var result = converter.ConvertToCSharp(code);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("var a = 5;", "[Імітація] Перетворення на VB завершено.\nРезультат: Dim a = 5")]
+        [InlineData("Dim b = 7", "[Імітація] Перетворення на VB завершено.\nРезультат: Dim b = 7")]
+        public void ConvertToVB_ReturnsExpectedResult(string code, string expected)
+        {
+            var converter = new ProgramConverter();
+
+            var result = converter.ConvertToVB(code);
 
             Assert.Equal(expected, result);
         }
