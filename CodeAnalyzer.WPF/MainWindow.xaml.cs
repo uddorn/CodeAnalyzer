@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.IO; 
 using CodeAnalyzer.Core;
 
 namespace CodeAnalyzer.WPF
@@ -8,20 +9,27 @@ namespace CodeAnalyzer.WPF
     {
         private ProgramHelper _helper = new ProgramHelper();
 
+        private readonly string _historyFile = "history.txt";
+
         public MainWindow()
         {
             InitializeComponent();
+
+            if (File.Exists(_historyFile))
+            {
+                OutputBox.Text = File.ReadAllText(_historyFile);
+            }
         }
 
         private void BtnConvertToCSharp_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                OutputBox.Text = _helper.ConvertToCSharp(InputCodeBox.Text);
+                OutputBox.Text += $"\n{_helper.ConvertToCSharp(InputCodeBox.Text)}\n";
             }
             catch (Exception ex)
             {
-                OutputBox.Text = $"Помилка: {ex.Message}";
+                OutputBox.Text += $"\nПомилка: {ex.Message}\n";
             }
         }
 
@@ -29,11 +37,11 @@ namespace CodeAnalyzer.WPF
         {
             try
             {
-                OutputBox.Text = _helper.ConvertToVB(InputCodeBox.Text);
+                OutputBox.Text += $"\n{_helper.ConvertToVB(InputCodeBox.Text)}\n";
             }
             catch (Exception ex)
             {
-                OutputBox.Text = $"Помилка: {ex.Message}";
+                OutputBox.Text += $"\nПомилка: {ex.Message}\n";
             }
         }
 
@@ -67,6 +75,13 @@ namespace CodeAnalyzer.WPF
                     OutputBox.Text += "  -> Підтримується лише конвертація\n\n";
                 }
             }
+        }
+
+        // Save the data to a file before closing the program
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            File.WriteAllText(_historyFile, OutputBox.Text);
+            base.OnClosing(e);
         }
     }
 }
