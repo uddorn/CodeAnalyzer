@@ -13,7 +13,17 @@ namespace CodeAnalyzer.Core
             { "Boolean", "bool" },
             { "Double", "double" },
             { "Char", "char" },
-            { "Long", "long" }
+            { "Long", "long" },
+            { "Decimal", "decimal" },
+            { "Single", "float" },
+            { "Short", "short" },
+            { "Byte", "byte" },
+            { "Object", "object" },
+            { "Date", "DateTime" },
+            { "UInteger", "uint" },
+            { "ULong", "ulong" },
+            { "UShort", "ushort" },
+            { "SByte", "sbyte" }
         };
 
         private string ProcessOutsideStrings(string code, Func<string, string> processAction)
@@ -78,7 +88,9 @@ namespace CodeAnalyzer.Core
                     text = Regex.Replace(text, $@"\b{mapping.Value}\s+(\w+)", $"Dim $1 As {mapping.Key}");
                     text = Regex.Replace(text, $@"\b{mapping.Value}\b", mapping.Key);
                 }
-                text = Regex.Replace(text, @"\bvar\b", "Dim");
+
+                text = Regex.Replace(text, @"\bvar\b(?=\s+\w+)", "Dim");
+
                 text = Regex.Replace(text, @"\btrue\b", "True");
                 text = Regex.Replace(text, @"\bfalse\b", "False");
                 return text;
